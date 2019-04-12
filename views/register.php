@@ -1,7 +1,9 @@
 <?php
+require './layout.php';
 ?>
 <html lang="en">
 <body>
+<?php renderMenuLinks();?>
 <h3>Register a new account</h3>
 <p id='match-err' style="color: red; display: none;">&#9888; <strong>Please ensure your passwords match.</strong></p>
 <p id='length-err' style="color: red; display: none;">&#9888; <strong>Your password should be at least 8 characters.</strong></p>

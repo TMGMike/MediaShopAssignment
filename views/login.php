@@ -1,8 +1,10 @@
 <?php
+require './layout.php';
 // Note: to filter tables to the media store in IDE, in Object Filter add:   table:^fss.*
 ?>
 <html lang="en">
     <body>
+    <?php renderMenuLinks();?>
     <script>
         function verifyPasswords() {
             var pass      = document.getElementById('login-pass');

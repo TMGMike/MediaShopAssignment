@@ -12,3 +12,27 @@ function getIconPath() {
     // Return the icon from my Content-Delivery Network (CDN)
     return 'https://cdn.themadgamers.co.uk/subathon.ico';
 }
+
+/**
+ * Set the hyperlinks for the menu to navigate across pages.
+ * Each page should call this method in the body to render these page links.
+ * Add a new link by setting the key as the text to display, and the value as the page to navigate to.
+ *
+ * This saves copy/pasting many <a> tags in every new document.
+ */
+function renderMenuLinks() {
+    $links = [
+        "Home" => "index.php",
+        "Login" => "login.php",
+        "Orders" => "orders.php",
+        "Account" => "account.php"
+    ];
+    $hyperlinks = "";
+
+    while ($link = current($links)) {
+        $key = key($links);
+        $hyperlinks .= "<a style='padding-right: 13px;' href='$link'>$key</a>";
+        next($links);
+    }
+    echo "<div style='width: 100%; left: 50%;'>$hyperlinks</div>";
+}

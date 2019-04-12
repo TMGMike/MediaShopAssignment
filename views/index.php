@@ -7,6 +7,7 @@ require './layout.php';
     <link rel="icon" href="<?php echo getIconPath() ?>" type="image/x-icon">
 </head>
 <body>
+<?php renderMenuLinks();?>
 <h1>Hello, World!</h1>
 <div id="store-list" class="store-list">
     <h4>Here is a list of our current stores. Drop by when you're nearby, we'd love to see you! (<i>Don't forget members
@@ -18,6 +19,7 @@ require './layout.php';
          FROM fss_Shop sh, fss_Address ad
          WHERE ad.addid = sh.addid
     -->
+
     <table>
 
     </table>
