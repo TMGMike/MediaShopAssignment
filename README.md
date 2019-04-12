@@ -1,5 +1,6 @@
-#CIS2360-1819 : Relational Databases and Web Integration
-##PART II: Media Shop Website
+# CIS2360-1819 : Relational Databases and Web Integration
+## PART II: Media Shop Website
+
 Here is my project for the Web Integration side of the module.
 
 We had to create a PHP site which allows users to:
