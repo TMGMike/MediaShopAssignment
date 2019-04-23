@@ -3,6 +3,10 @@ require './layout.php';
 // Note: to filter tables to the media store in IDE, in Object Filter add:   table:^fss.*
 ?>
 <html lang="en">
+<head>
+    <title>Login - <?php echo getAppName()?></title>
+    <link rel="icon" href="<?php echo getIconPath() ?>" type="image/x-icon">
+</head>
     <body>
     <?php renderMenuLinks();?>
     <script>

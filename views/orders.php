@@ -5,6 +5,7 @@ require './layout.php';
 <html lang="en">
 <head>
     <title><?php echo "Orders - ".getAppName()?></title>
+    <link rel="icon" href="<?php echo getIconPath() ?>" type="image/x-icon">
 </head>
 <body>
 <?php renderMenuLinks();?>

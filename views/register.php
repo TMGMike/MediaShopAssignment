@@ -1,7 +1,13 @@
 <?php
 require './layout.php';
+
+
 ?>
 <html lang="en">
+<head>
+    <title>Register - <?php echo getAppName()?></title>
+    <link rel="icon" href="<?php echo getIconPath() ?>" type="image/x-icon">
+</head>
 <body>
 <?php renderMenuLinks();?>
 <h3>Register a new account</h3>

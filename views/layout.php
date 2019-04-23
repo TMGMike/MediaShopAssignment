@@ -1,13 +1,18 @@
 <?php
 
-// TODO: Function to return a menu bar, with links to each view. Dynamically update with new files.
-
+/**
+ * Get the name of the application.
+ * @return string The name of the app.
+ */
 function getAppName() {
-    // Change the app's name dynamically for all pages.
     //TODO: Get this value from the database instead of hardcoded - fss_Shop.shopname (id 1 for online store).
     return "Media Store";
 }
 
+/**
+ * Returns the icon to display in the tab itself.
+ * @return string The URL or file path for the icon to display.
+ */
 function getIconPath() {
     // Return the icon from my Content-Delivery Network (CDN)
     return 'https://cdn.themadgamers.co.uk/subathon.ico';
@@ -22,17 +27,23 @@ function getIconPath() {
  */
 function renderMenuLinks() {
     $links = [
-        "Home" => "index.php",
-        "Login" => "login.php",
-        "Orders" => "orders.php",
-        "Account" => "account.php"
+        "Home"     =>  "index.php",
+        "Login"    =>  "login.php",
+        "Orders"   =>  "orders.php",
+        "Account"  =>  "account.php",
+        "Products" =>  "products.php",
+        "About"    =>  "about.php"
     ];
-    $hyperlinks = "";
+    $linkString = "";
 
+    // Loop through the menu links and create the <a> tags for each.
     while ($link = current($links)) {
         $key = key($links);
-        $hyperlinks .= "<a style='padding-right: 13px;' href='$link'>$key</a>";
+        $linkString .= "<a style='padding-right: 13px;' href='$link'>$key</a>";
         next($links);
+
     }
-    echo "<div style='width: 100%; left: 50%;'>$hyperlinks</div>";
+    // Display the div tag after the links have been added.
+
+    echo "<div style='width: 100%; left: 50%;'>$linkString</div>";
 }
