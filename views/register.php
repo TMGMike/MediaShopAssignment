@@ -1,7 +1,7 @@
 <?php
 require './layout.php';
-
-
+require_once __DIR__."/../models/UserDAO.php";
+$model = new UserDAO();
 ?>
 <html lang="en">
 <head>

@@ -24,15 +24,17 @@ function getIconPath() {
  * Add a new link by setting the key as the text to display, and the value as the page to navigate to.
  *
  * This saves copy/pasting many <a> tags in every new document.
+ * @param array $cart
  */
-function renderMenuLinks() {
+function renderMenuLinks(array $cart) {
     $links = [
-        "Home"     =>  "index.php",
-        "Login"    =>  "login.php",
-        "Orders"   =>  "orders.php",
-        "Account"  =>  "account.php",
-        "Products" =>  "products.php",
-        "About"    =>  "about.php"
+        "Home"     =>  "?p=index",
+        "Login"    =>  "?p=login",
+        "Orders"   =>  "?p=orders",
+        "Account"  =>  "?p=account",
+        "Products" =>  "?p=products",
+        "About"    =>  "?p=about",
+        "Cart: ".sizeof($cart)   =>  "?p=cart"
     ];
     $linkString = "";
 

@@ -7,7 +7,7 @@ class ShopDAO extends DatabaseDAO
 
     /**
      * Get the a specific shop's data from the database.
-     * @param $id The shop ID to find in the database.
+     * @param int $id The shop ID to find in the database.
      * @return array The row(s) from the specified shop.
      */
     public function getShop($id) {
@@ -20,7 +20,7 @@ class ShopDAO extends DatabaseDAO
      * @return array The array of rows returned from the database.
      */
     public function getAllShops() {
-        $result = $this->getAllData();
+        $result = $this->getData(["sh.addid" => "ad.addid"]);
         return $result;
     }
 }

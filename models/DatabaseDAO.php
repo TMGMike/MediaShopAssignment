@@ -1,6 +1,6 @@
 <?php
 
-include 'config/conf.php';
+include __DIR__.'/../config/conf.php';
 
 abstract class DatabaseDAO
 {
@@ -32,7 +32,6 @@ abstract class DatabaseDAO
     //   ]
     function getData($fields) {
         $query = "SELECT * FROM {$this->tableNames}";
-        $rows[] = array();
 
         // Loop through each condition for the SQL statement.
         while ($field = current($fields)) {
@@ -51,10 +50,10 @@ abstract class DatabaseDAO
 
         if ($result) {
             while($row = $result->fetch_object()) {
-                array_push($rows, $row);
+                $rows[] = $row;
             }
         }
-        echo $query;
+        // echo $query;
         return $rows;
     }
 
@@ -75,7 +74,8 @@ abstract class DatabaseDAO
                 $rows[] = $row;
             }
         }
-        echo $query;
+        else {echo "no results - {$this->database->error} - {$this->database->connect_error}";}
+       // echo $query;
         return $rows;
     }
 
@@ -85,6 +85,7 @@ abstract class DatabaseDAO
      * E.g:
      * [ "amount" => "12.27", "paydate" => "2017-05-24" ]
      * @param array $data The data to insert into the database.
+     * @return int Returns the id of the data which was just inserted into the database.
      */
     function insertData(array $data) {
         $query = "INSERT INTO {$this->tableNames}";
@@ -98,17 +99,23 @@ abstract class DatabaseDAO
             // Use WHERE instead of AND for the first element.
             if(array_search($value, array_values($data)) == 0) {
                 $columns .= "(".$key;
-                $values  .= "(".$value;
+                $values  .= "('".$value."'";
             }
             else {
                 $columns .= ", ".$key;
-                $values  .= ", ".$value;
+                $values  .= ", '".$value."'";
             }
             next($data); // Move onto the next condition.
         }
         $columns .= ")";
         $values  .= ")";
         $query .= " {$columns} VALUES {$values}";
-        echo $query;
+
+        if ($this->database->query($query) === TRUE) {
+            $lastId = $this->database->insert_id;
+        }
+        else {$lastId = null; }
+
+        return $lastId;
     }
 }
