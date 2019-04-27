@@ -31,4 +31,13 @@ class UserDAO extends DatabaseDAO
         $this->tableNames = "fss_Person pe, fss_Customer cu";
         return $id;
     }
+
+    public function getAddresses ($user_id) {
+        $this->tableNames = "fss_Address ad, fss_CustomerAddress ca";
+
+        $addresses = $this->getData(["ca.custid" => $user_id, "ad.addid" => "ca.addid"]);
+        $this->tableNames = "fss_Person pe, fss_Customer cu";
+
+        return $addresses;
+    }
 }

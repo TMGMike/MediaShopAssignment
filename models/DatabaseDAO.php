@@ -58,6 +58,26 @@ abstract class DatabaseDAO
     }
 
     /**
+     * Gets multiple rows from the database, using an array of values.
+     * Example: **WHERE id IN [1, 4, 32, 125];** returns items matching any of those IDs.
+     * @param string $column The column to check the attributes from, e.g. by ID.
+     * @param string $data A string of data, in parentheses and separated by commas (1, 4, 32, 125)
+     * @return array The data of selected rows from the database.
+     */
+    function getMultiple($column, $data) {
+        $query = "SELECT * FROM {$this->tableNames} WHERE {$column} IN {$data} ";
+        $result = $this->database->query($query);
+
+        if($result) {
+            while ($row = $result->fetch_object()) {
+                $rows[] = $row;
+            }
+        }
+        // echo $query;
+        return $rows;
+    }
+
+    /**
      * Get all of the data from the database. Takes a parameter for the limit, but this is defaulted to a large value if
      * not provided.
      * @param int $limit The limit of rows to be returned. Defaults to a high value if not provided, so that most or all

@@ -29,9 +29,14 @@ class ProductsView {
 
     public function output() {
         $filmString = '<h3>Our Collection</h3><br>'.$this->outputFilterForm();
+
         if(isset($_GET["added"]) && $_GET["added"] == "true") {
             $filmString .= "<p style='color: forestgreen'>&checkmark; Updated Cart</p>";
+        } else if ($_GET["added"] == "false") {
+            $filmString .= "<p style='color: darkred'>&#9888; This item already exists in the cart.</p>";
         }
+
+
         if(isset($_GET['rating']) && $_GET['rating'] != "" && $_GET['rating'] != "all") {
             $films = $this->model->getFilmByRating($_GET['rating']);
         }

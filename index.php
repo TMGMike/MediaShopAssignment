@@ -7,12 +7,27 @@ $page = (isset($_GET["p"])) ? $_GET["p"] : "index";
 
 $cart = (isset($_SESSION['cart'])) ? $_SESSION['cart'] : array();
 
-$_SESSION['cart'] = $cart;
+echo "[".implode(', ', $cart)."]";
+
 
 if(isset($_POST["cart_fid"])) {
-    $cart[] = $_POST["cart_fid"];
+    if(in_array($_POST["cart_fid"], $cart)) {
+        header("Location:?p=products&added=false");
+        exit();
+    }
+    else {
+        $cart[] = $_POST["cart_fid"];
+        $_SESSION['cart'] = $cart;
+        header("Location:?p=products&added=true");
+        exit();
+    }
+}
+
+// Has the user clicked the Clear Cart button? If so clear the array and session variable, and reload.
+if(isset($_POST["clear"]) && $_POST["clear"] == 1) {
+    $cart = array();
     $_SESSION['cart'] = $cart;
-    header("Location:?p=products&added=true");
+    header("Location:?p=cart");
     exit();
 }
 
@@ -33,8 +48,23 @@ switch ($page) {
         $controller = new ProductsController($model);
         break;
     case 'login':
+        require_once __DIR__.'/models/UserDAO.php';
+        //include_once __DIR__.'/views/LoginView.php';
         $model = new UserDAO();
         // $view = new LoginView($model);
+        break;
+    case 'cart':
+        require_once __DIR__.'/models/ProductDAO.php';
+        include_once __DIR__.'/views/CartView.php';
+        $model = new ProductDAO();
+        $view = new CartView($model);
+        $view->cart = $cart;
+        break;
+    case 'account':
+        require_once __DIR__.'/models/UserDAO.php';
+        include_once __DIR__.'/views/AccountView.php';
+        $model = new UserDAO();
+        $view = new AccountView($model);
         break;
     default:
         include_once __DIR__.'/views/ErrorView.php';
@@ -60,7 +90,7 @@ switch ($page) {
 <body>
 <?php renderMenuLinks($cart);?>
 <div style="width: 60%; align-content: center; left: 25%; position: relative;">
-    <?php echo $view->output()?>
+    <?php echo $cartError; echo $view->output()?>
 </div>
 </body>
 </html>

@@ -10,6 +10,19 @@ class ProductDAO extends DatabaseDAO
         return $result;
     }
 
+    /**
+     * Gets multiple films at once, by their IDs. This is useful for retrieving the contents of the cart.
+     * Instead of querying each film individually, or unnecessarily querying _all_ films for a small cart.
+     * @param array $ids The array of IDs to query.
+     * @return array Array of results from the database.
+     */
+    public function getMultipleById(array $ids) {
+        $stringList = "(".implode(', ', $ids).")";
+
+        $results = $this->getMultiple("fi.filmid", $stringList);
+        return $results;
+    }
+
     public function getAllFilms() {
         $results = $this->getAllData();
         return $results;
